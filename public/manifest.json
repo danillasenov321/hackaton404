@@ -1,7 +1,7 @@
 {
-	"name": "Туризм Донецкой области",
-	"short_name": "ДонТур",
-	"description": "Гид для туристов по Донецкой области.",
+	"name": "Мое PWA Приложение",
+	"short_name": "PWA",
+	"description": "Описание моего PWA приложения",
 	"start_url": "/",
 	"display": "standalone",
 	"background_color": "#ffffff",
