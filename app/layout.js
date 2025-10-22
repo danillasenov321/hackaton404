@@ -4,6 +4,10 @@ export const metadata = {
 	manifest: "/manifest.json"
 };
 
-export default function NotFoundLayout({ children }) {
-	return <>{children}</>;
+export default function RootLayout({ children }) {
+	return (
+		<html lang="ru">
+			<body>{children}</body>
+		</html>
+	);
 }
