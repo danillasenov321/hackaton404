@@ -11,7 +11,6 @@ export default function LocationsPage() {
 	const [dbTypes, setDbTypes] = useState({});
 	const [loading, setLoading] = useState(true);
 
-	// Загрузка данных на клиенте
 	useEffect(() => {
 		async function fetchData() {
 			try {
@@ -27,7 +26,6 @@ export default function LocationsPage() {
 				setDbTypes(typesData);
 			} catch (error) {
 				console.error("Ошибка загрузки данных:", error);
-				// Можно добавить fallback данные
 			} finally {
 				setLoading(false);
 			}

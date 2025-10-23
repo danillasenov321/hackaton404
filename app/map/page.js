@@ -97,7 +97,6 @@ export default function MapPage() {
 		}
 	];
 
-	// [Остальной код определения местоположения без изменений]
 	const getCurrentLocation = () => {
 		setLocationLoading(true);
 		setLocationError(null);

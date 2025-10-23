@@ -15,7 +15,6 @@ export default function RoutesPage() {
 	];
 
 	const buildRoute = () => {
-		// Заглушка для построения маршрута
 		setCurrentRoute({
 			distance: "3.2 км",
 			time: "25 мин",
