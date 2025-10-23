@@ -1,34 +1,61 @@
 // app/login/page.js
-'use client'
-import { useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [rememberMe, setRememberMe] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [rememberMe, setRememberMe] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState("");
+	const router = useRouter();
 
-  const handleLogin = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-    
-    // Имитация процесса входа
-    setTimeout(() => {
-      setIsLoading(false)
-      // После успешного входа перенаправляем на профиль
-      router.push('/profile')
-    }, 1500)
-  }
+	const handleLogin = async e => {
+		e.preventDefault();
+		setError("");
+		setIsLoading(true);
+
+		try {
+			const response = await fetch("/api/login", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					email,
+					password
+				})
+			});
+
+			const data = await response.json();
+
+			if (!response.ok) {
+				throw new Error(data.error || "Ошибка входа");
+			}
+
+			if (!data.succes) {
+				throw new Error("Неверный email или пароль");
+			}
+
+			localStorage.setItem("user", JSON.stringify(data.user));
+
+			router.push("/profile");
+		} catch (error) {
+			console.error("Ошибка входа:", error);
+			setError(error.message);
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
-        {/* Карточка входа */}
+        
         <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-soft p-8 border border-white/30">
-          {/* Заголовок */}
+       
           <div className="text-center mb-8">
             <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-4">
               👤
@@ -38,8 +65,6 @@ export default function LoginPage() {
             </h1>
             <p className="text-gray-600 mt-2">Войдите, чтобы получить полный доступ</p>
           </div>
-
-          {/* Форма входа */}
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -108,30 +133,15 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Разделитель */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">или</span>
+            
             </div>
           </div>
 
-          {/* Социальные сети */}
-          <div className="space-y-3">
-            <button className="w-full p-4 bg-white border border-gray-300 rounded-2xl font-medium hover:bg-gray-50 transition-all flex items-center justify-center gap-3">
-              <span className="text-blue-600">🔵</span>
-              <span>Войти через ВКонтакте</span>
-            </button>
-            
-            <button className="w-full p-4 bg-white border border-gray-300 rounded-2xl font-medium hover:bg-gray-50 transition-all flex items-center justify-center gap-3">
-              <span className="text-red-500">🔴</span>
-              <span>Войти через Google</span>
-            </button>
-          </div>
-
-          {/* Регистрация */}
           <div className="text-center mt-6">
             <p className="text-gray-600">
               Ещё нет аккаунта?{' '}
@@ -142,7 +152,6 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Дополнительная информация */}
         <div className="text-center mt-6">
           <p className="text-sm text-gray-500">
             Войдите, чтобы сохранять избранные места и оставлять отзывы
