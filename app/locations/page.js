@@ -3,10 +3,14 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { locations, categories } from '../../lib/data'
 
-export default function LocationsPage() {
+export default async function LocationsPage() {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
   const [sortBy, setSortBy] = useState('rating')
+  let req_obj = await fetch("http://localhost:3000/objects.json")
+  let db_obj = await req_obj.json()
+  let req_types = await fetch("http://localhost:3000/object_types.json")
+  let db_types = await req_types.json()
 
   const filteredLocations = locations
     .filter(location => {
@@ -157,69 +161,11 @@ export default function LocationsPage() {
           <div className="lg:col-span-3">
             {filteredLocations.length > 0 ? (
               <div className="grid gap-4">
-                {filteredLocations.map(location => (
-                  <div 
-                    key={location.id}
-                    className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-soft hover:shadow-medium transition-all duration-300 border border-white/30 overflow-hidden group"
-                  >
-                    <div className="flex">
-                      {/* Изображение */}
-                      <div className={`w-32 h-32 bg-gradient-to-r ${getCategoryColor(location.category)} flex items-center justify-center relative overflow-hidden`}>
-                        <span className="text-4xl text-white">{getCategoryIcon(location.category)}</span>
-                        <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
-                      </div>
-                      
-                      {/* Контент */}
-                      <div className="flex-1 p-6">
-                        <div className="flex justify-between items-start mb-3">
-                          <div>
-                            <h3 className="text-xl font-semibold text-gray-800 mb-1 group-hover:text-blue-600 transition-colors">
-                              {location.name}
-                            </h3>
-                            <p className="text-gray-600 text-sm mb-2">{location.description}</p>
-                          </div>
-                          <button className="text-gray-400 hover:text-yellow-500 transition-colors p-2 group/fav">
-                            <span className="text-2xl group-hover/fav:scale-110 transition-transform">⭐</span>
-                          </button>
-                        </div>
-                        
-                        {/* Мета-информация */}
-                        <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
-                          <span className="flex items-center gap-1">
-                            📍 {location.address}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            🕒 {location.workingHours}
-                          </span>
-                        </div>
-                        
-                        {/* Рейтинг и действия */}
-                        <div className="flex justify-between items-center">
-                          <div className="flex items-center gap-4">
-                            <div className="flex items-center gap-1 bg-yellow-50 px-3 py-1 rounded-full">
-                              <span className="text-yellow-500">⭐</span>
-                              <span className="font-semibold text-gray-800">{location.rating}</span>
-                              <span className="text-gray-500 text-sm">({location.reviews})</span>
-                            </div>
-                            <span className={`px-3 py-1 rounded-full text-sm font-medium text-white bg-gradient-to-r ${getCategoryColor(location.category)}`}>
-                              {location.category === 'park' && 'Парк'}
-                              {location.category === 'cafe' && 'Кафе'}
-                              {location.category === 'hotel' && 'Отель'}
-                              {location.category === 'museum' && 'Музей'}
-                            </span>
-                          </div>
-                          
-                          <div className="flex gap-2">
-                            <button className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-medium hover:shadow-soft transition-shadow">
-                              Маршрут
-                            </button>
-                            <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors">
-                              Подробнее
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                {db_obj.map((item) => (
+                  <div>
+                    <h3>{item.name}</h3>
+                    <p>{item.discription}</p>
+                    <p>Раздел: {db_types[item.type]}</p>
                   </div>
                 ))}
               </div>
