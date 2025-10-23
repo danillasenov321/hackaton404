@@ -114,21 +114,8 @@ export default function LoginPage() {
               <div className="w-full border-t border-gray-300"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">или</span>
-            </div>
-          </div>
-
-          {/* Социальные сети */}
-          <div className="space-y-3">
-            <button className="w-full p-4 bg-white border border-gray-300 rounded-2xl font-medium hover:bg-gray-50 transition-all flex items-center justify-center gap-3">
-              <span className="text-blue-600">🔵</span>
-              <span>Войти через ВКонтакте</span>
-            </button>
             
-            <button className="w-full p-4 bg-white border border-gray-300 rounded-2xl font-medium hover:bg-gray-50 transition-all flex items-center justify-center gap-3">
-              <span className="text-red-500">🔴</span>
-              <span>Войти через Google</span>
-            </button>
+            </div>
           </div>
 
           {/* Регистрация */}
