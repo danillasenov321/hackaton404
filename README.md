@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Документация
 
-## Getting Started
+## Требования к проекту:
 
-First, run the development server:
+- кроссплатформенность ( Android и iOS)
+- интуитивно понятный и современный интерфейс с навигацией через нижнюю панель вкладок (Карта, Каталог, Избранное, Маршруты);
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- высокая производительность: плавные анимации, отзывчивый скроллинг, мгновенное отображение данных на карте;
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- поддержка экранов различных размеров и ориентации;
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- скорость запуска приложения не более 2 секунд;
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- офлайн карты (если выбраны) должны быть ограничены размером в 150 МБ;
 
-## Learn More
+- минимальный набор разрешений ( геолокация , доступ к памяти для офлайн карт);
 
-To learn more about Next.js, take a look at the following resources:
+- локальное хранение пользовательских данных (избранное, настройки).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Запуск:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. При использовании скриптов package.json:
 
-## Deploy on Vercel
+- npm i
+- npm run build
+- npm run start
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. При ручном запуске:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- npm i
+- next build --webpack
+- next start -p 3001
