@@ -1,0 +1,23 @@
+[
+	{
+		"nickname": "Кузнецов Алексей Анатольевич",
+		"role": 2,
+		"property": [
+			{
+				"name": "Green Plaza",
+				"discription": "Мега-рынок",
+				"type": 4,
+				"ya_coord": "37.805143%2C47.992598",
+				"comments": [],
+				"owner": "Кузнецов Алексей Анатольевич"
+			}
+		],
+		"selected": []
+	},
+	{
+		"nickname": "Вася Пупкин",
+		"property": [],
+		"role": 4,
+		"selected": []
+	}
+]
