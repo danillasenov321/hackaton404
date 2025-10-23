@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
 export default function ProfilePage() {
 	const [activeTab, setActiveTab] = useState("profile");
@@ -81,7 +80,6 @@ export default function ProfilePage() {
 			</header>
 
 			<main className="container py-6">
-				{/* Информация пользователя */}
 				<div className="dark-card rounded-2xl p-6 text-center mb-6">
 					<div className="w-20 h-20 gradient-primary rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
 						👤
@@ -95,7 +93,6 @@ export default function ProfilePage() {
 					</button>
 				</div>
 
-				{/* Статистика */}
 				<div className="grid grid-cols-3 gap-3 mb-6">
 					{stats.map((stat, index) => (
 						<div
@@ -109,7 +106,6 @@ export default function ProfilePage() {
 					))}
 				</div>
 
-				{/* Недавняя активность */}
 				<div className="mb-6">
 					<h3 className="text-lg font-semibold text-white mb-4">
 						Недавняя активность
@@ -136,7 +132,6 @@ export default function ProfilePage() {
 					</div>
 				</div>
 
-				{/* Быстрые действия */}
 				<div className="space-y-3">
 					<button className="w-full dark-card rounded-xl p-4 text-left hover:shadow-medium transition-shadow">
 						<div className="flex items-center gap-3">
@@ -164,7 +159,6 @@ export default function ProfilePage() {
 				</div>
 			</main>
 
-			{/* Мобильная навигация */}
 			<nav className="mobile-nav fixed bottom-0 left-0 right-0">
 				<div className="container">
 					<div className="flex justify-around py-3">
