@@ -1,4 +1,3 @@
-// app/museums/page.js
 'use client'
 import { useState } from 'react'
 import { locations } from '../../lib/data'

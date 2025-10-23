@@ -1,9 +1,37 @@
-'use client'
-import { useState } from 'react'
-import Link from 'next/link'
+"use client";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function ProfilePage() {
-  const [activeTab, setActiveTab] = useState('profile')
+	const [activeTab, setActiveTab] = useState("profile");
+	const [user, setUser] = useState(null);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		const userData = localStorage.getItem("user");
+
+		if (userData) {
+			setUser(JSON.parse(userData));
+		}
+
+		setLoading(false);
+	}, []);
+
+	if (loading) {
+		return (
+			<div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+				<div className="text-white text-xl">Загрузка...</div>
+			</div>
+		);
+	}
+
+	if (!user) {
+		return (
+			<div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+				<h1 className="text-white text-xl">Не ваш аккаунт</h1>
+			</div>
+		);
+	}
 
   const stats = [
     { label: 'Посещено мест', value: '12', icon: '📍', color: 'from-blue-500 to-cyan-500' },
@@ -46,7 +74,7 @@ export default function ProfilePage() {
           <div className="w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-3xl mx-auto mb-6 shadow-lg animate-float">
             👤
           </div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Алексей Петров</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">{user.nickname || user.name || user.email}</h2>
           <p className="text-gray-600 text-lg mb-6">Турист • Донецк</p>
           <button className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
             <span>✏️</span>

@@ -18,3 +18,4 @@ export async function POST(req) {
 
 	return Response.json({ succes: false });
 }
+// AUTO REG CREATE
