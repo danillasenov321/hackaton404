@@ -1,14 +1,15 @@
-// app/cafes/page.js
 'use client'
 import { useState } from 'react'
-import { locations } from '../../lib/data'
 import BottomNavigation from '../../components/BottomNavigation'
 
-export default function CafesPage() {
+export default async function CafesPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [activeFilter, setActiveFilter] = useState('all')
   
-  const cafeLocations = locations.filter(location => location.category === 'cafe')
+  let req = await fetch("http://localhost:3000/objects.json")
+  let db = await req.json()
+  
+  const cafeLocations = db.filter(location => location.type === 3)
   
   const filters = [
     { id: 'all', name: 'Все', icon: '🍽️' },
@@ -20,7 +21,6 @@ export default function CafesPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50/30 to-red-50/30 pb-20">
-      {/* Шапка с градиентом */}
       <header className="bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-strong">
         <div className="container py-6">
           <div className="flex items-center gap-4 mb-6">
@@ -123,7 +123,6 @@ export default function CafesPage() {
           ))}
         </div>
 
-        {/* Сообщение если нет результатов */}
         {cafeLocations.length === 0 && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">🍽️</div>
